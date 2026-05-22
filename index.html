@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Rashid Ahmed | Android Developer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<style>
+
+:root{
+    --bg:#030712;
+    --card:#0f172a;
+    --card2:#111827;
+    --accent:#00ff9d;
+    --accent2:#00c853;
+    --text:#f8fafc;
+    --muted:#94a3b8;
+}
+
+/* LIGHT THEME */
+
+body.light-theme{
+    --bg:#f8fafc;
+    --card:#ffffff;
+    --card2:#e2e8f0;
+    --accent:#00c853;
+    --accent2:#00ff9d;
+    --text:#020617;
+    --muted:#475569;
+
+    background:
+    linear-gradient(135deg,#f8fafc,#e2e8f0,#ffffff);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Inter','Hind Siliguri',sans-serif;
+
+    background:
+    radial-gradient(circle at top left,#052e16 0%,transparent 30%),
+    radial-gradient(circle at bottom right,#0f172a 0%,transparent 35%),
+    linear-gradient(135deg,#020617,#030712,#000000);
+
+    color:var(--text);
+    overflow-x:hidden;
+    cursor:none;
+    transition:0.4s;
+}
+
+/* CUSTOM CURSOR */
+
+#cursor{
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    background:white;
+    position:fixed;
+    pointer-events:none;
+    z-index:99999;
+    mix-blend-mode:difference;
+}
+
+/* BACKGROUND */
+
+.grid-bg{
+    position:fixed;
+    inset:0;
+    background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+
+    background-size:50px 50px;
+
+    z-index:-2;
+}
+
+.blur1,
+.blur2,
+.blur3{
+    position:fixed;
+    border-radius:50%;
+    filter:blur(120px);
+    opacity:0.25;
+    z-index:-1;
+}
+
+.blur1{
+    width:400px;
+    height:400px;
+    background:#00ff9d;
+    top:-100px;
+    left:-100px;
+}
+
+.blur2{
+    width:400px;
+    height:400px;
+    background:#00b0ff;
+    bottom:-100px;
+    right:-100px;
+}
+
+.blur3{
+    width:250px;
+    height:250px;
+    background:#00c853;
+    top:40%;
+    left:40%;
+}
+
+/* NAVBAR */
+
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:1000;
+    padding:20px;
+}
+
+.nav-container{
+    max-width:1200px;
+    margin:auto;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:rgba(15,23,42,0.65);
+
+    border:1px solid rgba(255,255,255,0.06);
+
+    backdrop-filter:blur(20px);
+
+    padding:18px 30px;
+
+    border-radius:25px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.35),
+    0 0 30px rgba(0,255,157,0.08);
+}
+
+body.light-theme .nav-container{
+    background:rgba(255,255,255,0.7);
+}
+
+.logo{
+    font-size:30px;
+    font-weight:900;
+}
+
+.logo span{
+    color:var(--accent);
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.nav-links a{
+    color:var(--text);
+    text-decoration:none;
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:2px;
+    transition:0.3s;
+
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    padding:12px 18px;
+    border-radius:14px;
+}
+
+.nav-links a:hover{
+    color:var(--accent);
+    background:rgba(255,255,255,0.05);
+}
+
+.contact-btn{
+    background:linear-gradient(135deg,var(--accent),#00c853);
+
+    color:black !important;
+
+    padding:12px 22px;
+
+    border-radius:14px;
+
+    font-weight:800;
+}
+
+/* THEME BUTTON */
+
+.theme-btn{
+    width:50px;
+    height:50px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:linear-gradient(135deg,#00ff9d,#00c853);
+
+    color:black;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    transition:0.4s;
+}
+
+.theme-btn:hover{
+    transform:rotate(10deg) scale(1.05);
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+
+    display:flex;
+    align-items:center;
+
+    padding:140px 20px 80px;
+}
+
+.hero-container{
+    max-width:1200px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:80px;
+    align-items:center;
+}
+
+.tag{
+    display:inline-block;
+
+    padding:10px 18px;
+
+    border-radius:50px;
+
+    background:rgba(0,255,157,0.1);
+
+    border:1px solid rgba(0,255,157,0.2);
+
+    color:var(--accent);
+
+    font-size:12px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    margin-bottom:25px;
+}
+
+.hero h1{
+    font-size:85px;
+    line-height:0.95;
+    font-weight:900;
+    margin-bottom:25px;
+}
+
+.hero h1 span{
+    background:linear-gradient(135deg,#00ff9d,#00e5ff);
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+    color:var(--muted);
+    line-height:1.9;
+    font-size:18px;
+    margin-bottom:40px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.primary-btn{
+    padding:18px 34px;
+
+    background:linear-gradient(135deg,#00ff9d,#00c853);
+
+    border-radius:18px;
+
+    color:black;
+
+    text-decoration:none;
+
+    font-weight:800;
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    transition:0.4s;
+}
+
+.primary-btn:hover{
+    transform:translateY(-6px);
+}
+
+.secondary-btn{
+    padding:18px 34px;
+
+    border-radius:18px;
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    background:rgba(255,255,255,0.03);
+
+    text-decoration:none;
+
+    color:var(--text);
+
+    font-weight:700;
+}
+
+.phone-frame{
+    position:relative;
+    width:340px;
+    margin:auto;
+}
+
+.phone{
+    width:100%;
+    border-radius:45px;
+
+    border:10px solid #111827;
+
+    background:#000;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 30px 80px rgba(0,0,0,0.6),
+    0 0 50px rgba(0,255,157,0.15);
+}
+
+.phone img{
+    width:100%;
+    display:block;
+}
+
+.floating-card{
+    position:absolute;
+
+    background:rgba(15,23,42,0.8);
+
+    border:1px solid rgba(255,255,255,0.06);
+
+    backdrop-filter:blur(15px);
+
+    padding:18px 22px;
+
+    border-radius:20px;
+}
+
+body.light-theme .floating-card{
+    background:rgba(255,255,255,0.7);
+}
+
+.card1{
+    top:40px;
+    left:-60px;
+}
+
+.card2{
+    bottom:40px;
+    right:-60px;
+}
+
+.floating-card i{
+    color:var(--accent);
+    margin-bottom:10px;
+    font-size:22px;
+}
+
+/* SECTION */
+
+section{
+    padding:120px 20px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:70px;
+}
+
+.section-title h2{
+    font-size:60px;
+    font-weight:900;
+    margin-bottom:15px;
+}
+
+.section-title span{
+    color:var(--accent);
+}
+
+.section-title p{
+    color:var(--muted);
+    letter-spacing:3px;
+    font-size:13px;
+}
+
+/* GLASS CARD */
+
+.glass{
+    background:rgba(15,23,42,0.65);
+
+    border:1px solid rgba(255,255,255,0.06);
+
+    backdrop-filter:blur(20px);
+
+    border-radius:30px;
+
+    transition:0.45s;
+}
+
+body.light-theme .glass{
+    background:rgba(255,255,255,0.7);
+}
+
+.glass:hover{
+    transform:translateY(-8px);
+
+    border-color:rgba(0,255,157,0.3);
+
+    box-shadow:
+    0 20px 60px rgba(0,0,0,0.45),
+    0 0 40px rgba(0,255,157,0.1);
+}
+
+/* SKILLS */
+
+.skills-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
+.skill-card{
+    padding:40px;
+}
+
+.skill-card i{
+    font-size:50px;
+    margin-bottom:25px;
+    color:var(--accent);
+}
+
+.skill-card h3{
+    font-size:24px;
+    margin-bottom:15px;
+}
+
+.skill-card p{
+    color:var(--muted);
+    line-height:1.8;
+}
+
+/* TECH STACK */
+
+.tech-stack{
+    margin-top:40px;
+    padding:40px;
+}
+
+.stack-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+    gap:30px;
+    text-align:center;
+}
+
+.stack-grid i{
+    font-size:34px;
+    margin-bottom:12px;
+    color:var(--accent);
+}
+
+.stack-grid span{
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:1px;
+}
+
+/* PROJECTS */
+
+.projects-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:35px;
+}
+
+.project-card{
+    overflow:hidden;
+}
+
+.project-image{
+    height:260px;
+    overflow:hidden;
+}
+
+.project-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:0.8s;
+}
+
+.project-card:hover img{
+    transform:scale(1.1);
+}
+
+.project-content{
+    padding:30px;
+}
+
+.project-content h3{
+    font-size:28px;
+    margin-bottom:10px;
+}
+
+.project-content p{
+    color:var(--muted);
+    margin-bottom:25px;
+}
+
+.apk-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+
+    padding:14px 24px;
+
+    border-radius:14px;
+
+    background:linear-gradient(135deg,#00ff9d,#00c853);
+
+    color:black;
+
+    text-decoration:none;
+
+    font-weight:800;
+}
+
+/* CONTACT */
+
+.contact-box{
+    padding:70px;
+}
+
+.contact-box h2{
+    font-size:55px;
+    margin-bottom:25px;
+    line-height:1.2;
+}
+
+.contact-box span{
+    color:var(--accent);
+}
+
+.contact-box p{
+    color:var(--muted);
+    margin-bottom:45px;
+}
+
+form{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+form input,
+form textarea{
+    width:100%;
+
+    background:rgba(255,255,255,0.03);
+
+    border:1px solid rgba(255,255,255,0.06);
+
+    border-radius:18px;
+
+    padding:18px 24px;
+
+    color:var(--text);
+
+    outline:none;
+}
+
+form textarea{
+    grid-column:span 2;
+    height:160px;
+    resize:none;
+}
+
+form button{
+    grid-column:span 2;
+
+    border:none;
+
+    background:linear-gradient(135deg,#00ff9d,#00c853);
+
+    color:black;
+
+    padding:18px;
+
+    border-radius:18px;
+
+    font-weight:900;
+
+    cursor:pointer;
+}
+
+/* SOCIAL */
+
+.socials{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    margin-top:50px;
+}
+
+.socials a{
+    width:70px;
+    height:70px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.04);
+
+    color:var(--text);
+
+    font-size:24px;
+
+    transition:0.4s;
+}
+
+.socials a:hover{
+    background:var(--accent);
+    color:black;
+    transform:translateY(-6px);
+}
+
+/* FOOTER */
+
+footer{
+    padding:35px;
+    text-align:center;
+    border-top:1px solid rgba(255,255,255,0.06);
+    color:var(--muted);
+}
+
+/* MOBILE */
+
+@media(max-width:992px){
+
+.hero-container{
+    grid-template-columns:1fr;
+}
+
+.skills-grid{
+    grid-template-columns:1fr;
+}
+
+.projects-grid{
+    grid-template-columns:1fr;
+}
+
+.hero h1{
+    font-size:60px;
+}
+
+.contact-box{
+    padding:40px;
+}
+
+.contact-box h2{
+    font-size:40px;
+}
+
+form{
+    grid-template-columns:1fr;
+}
+
+form textarea,
+form button{
+    grid-column:span 1;
+}
+
+.nav-links{
+    gap:10px;
+}
+
+.nav-links a{
+    font-size:11px;
+    padding:10px 12px;
+}
+
+.phone-frame{
+    width:280px;
+}
+
+.card1{
+    left:-20px;
+}
+
+.card2{
+    right:-20px;
+}
+
+.stack-grid{
+    grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="cursor"></div>
+
+<div class="grid-bg"></div>
+
+<div class="blur1"></div>
+<div class="blur2"></div>
+<div class="blur3"></div>
+
+<!-- NAVBAR -->
+
+<nav>
+
+<div class="nav-container">
+
+<div class="logo">
+Rashid<span>.</span>
+</div>
+
+<div class="nav-links">
+
+<a href="#home">
+<i class="fas fa-house"></i>
+HOME
+</a>
+
+<a href="#skills">
+<i class="fas fa-code"></i>
+SKILLS
+</a>
+
+<a href="#projects">
+<i class="fas fa-layer-group"></i>
+PROJECTS
+</a>
+
+<a href="#contact" class="contact-btn">
+<i class="fas fa-paper-plane"></i>
+CONTACT
+</a>
+
+<button id="themeToggle" class="theme-btn">
+<i class="fas fa-moon"></i>
+</button>
+
+</div>
+
+</div>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+<div class="hero-container">
+
+<div>
+
+<div class="tag">
+ANDROID APP DEVELOPER 2026
+</div>
+
+<h1>
+Modern <span>Android</span><br>
+Applications
+</h1>
+
+<p>
+
+আমি রশিদ আহমদ —
+একজন Native Android Application Developer।
+
+আমি Java দিয়ে আধুনিক Android Application,
+Firebase System,
+REST API,
+Offline Database,
+Business Automation Apps
+এবং Smart Mobile Solutions তৈরি করি।
+
+দ্রুত, secure এবং professional mobile application তৈরি করাই আমার লক্ষ্য।
+
+</p>
+
+<div class="hero-buttons">
+
+<a href="#projects" class="primary-btn">
+<i class="fas fa-layer-group"></i>
+View Projects
+</a>
+
+<a href="#contact" class="secondary-btn">
+Contact Me
+</a>
+
+</div>
+
+</div>
+
+<div>
+
+<div class="phone-frame">
+
+<div class="phone">
+
+<img src="https://shorturl.at/SEMhB">
+
+</div>
+
+<div class="floating-card card1">
+
+<i class="fab fa-android"></i>
+
+<h4>34+</h4>
+
+<p>Android Apps</p>
+
+</div>
+
+<div class="floating-card card2">
+
+<i class="fas fa-fire"></i>
+
+<h4>Firebase</h4>
+
+<p>Realtime Systems</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- SKILLS -->
+
+<section id="skills">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>
+Android <span>Skills</span>
+</h2>
+
+<p>
+MODERN MOBILE DEVELOPMENT STACK
+</p>
+
+</div>
+
+<div class="skills-grid">
+
+<div class="glass skill-card">
+
+<i class="fab fa-java"></i>
+
+<h3>Native Android</h3>
+
+<p>
+
+Java Based Native Android Development,
+Clean Architecture,
+Material Design,
+RecyclerView,
+ViewPager2,
+Fragment System,
+Offline Apps,
+Secure UI/UX.
+
+</p>
+
+</div>
+
+<div class="glass skill-card">
+
+<i class="fas fa-fire"></i>
+
+<h3>Firebase System</h3>
+
+<p>
+
+Firebase Authentication,
+Realtime Database,
+Firestore,
+Push Notifications,
+Cloud Storage,
+Live Sync System,
+Secure User Management.
+
+</p>
+
+</div>
+
+<div class="glass skill-card">
+
+<i class="fas fa-database"></i>
+
+<h3>Database & API</h3>
+
+<p>
+
+SQLite,
+MySQL,
+REST API,
+JSON Parsing,
+PHP Backend,
+Cloud Connectivity,
+Offline Data Management.
+
+</p>
+
+</div>
+
+</div>
+
+<!-- TECH STACK -->
+
+<div class="glass tech-stack">
+
+<div class="stack-grid">
+
+<div class="text-center">
+<i class="fab fa-java"></i>
+<br>
+<span>Java</span>
+</div>
+
+<div class="text-center">
+<i class="fab fa-android"></i>
+<br>
+<span>Android</span>
+</div>
+
+<div class="text-center">
+<i class="fas fa-database"></i>
+<br>
+<span>SQLite</span>
+</div>
+
+<div class="text-center">
+<i class="fas fa-server"></i>
+<br>
+<span>MySQL</span>
+</div>
+
+<div class="text-center">
+<i class="fab fa-php"></i>
+<br>
+<span>PHP</span>
+</div>
+
+<div class="text-center">
+<i class="fab fa-github"></i>
+<br>
+<span>GitHub</span>
+</div>
+
+<div class="text-center">
+<i class="fas fa-code"></i>
+<br>
+<span>REST API</span>
+</div>
+
+<div class="text-center">
+<i class="fas fa-cloud"></i>
+<br>
+<span>Cloud</span>
+</div>
+
+<div class="text-center">
+<i class="fas fa-mobile-alt"></i>
+<br>
+<span>UI/UX</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- PROJECTS -->
+
+<section id="projects">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>
+Featured <span>Projects</span>
+</h2>
+
+<p>
+ANDROID APPLICATION PORTFOLIO
+</p>
+
+</div>
+
+<div class="projects-grid">
+
+<div class="glass project-card">
+
+<div class="project-image">
+
+<img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1200&auto=format&fit=crop">
+
+</div>
+
+<div class="project-content">
+
+<h3>Dictionary App</h3>
+
+<p>
+Java • SQLite • Offline System
+</p>
+
+<a href="https://github.com/rashidunlimited/Android-Project/raw/refs/heads/main/Dictionary/Dictionary.apk" class="apk-btn">
+
+<i class="fas fa-download"></i>
+
+Download APK
+
+</a>
+
+</div>
+
+</div>
+
+<div class="glass project-card">
+
+<div class="project-image">
+
+<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop">
+
+</div>
+
+<div class="project-content">
+
+<h3>Smart Article App</h3>
+
+<p>
+REST API • JSON • Android
+</p>
+
+<a href="#" class="apk-btn">
+
+<i class="fas fa-download"></i>
+
+Download APK
+
+</a>
+
+</div>
+
+</div>
+
+
+<!-- NEW PROJECT -->
+
+<div class="glass project-card">
+
+    <div class="project-image">
+
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop">
+
+    </div>
+
+    <div class="project-content">
+
+        <h3>Chat Application</h3>
+
+        <p>
+        Firebase • Realtime Chat • Java
+        </p>
+
+        <a href="#" class="apk-btn">
+
+            <i class="fas fa-download"></i>
+
+            Download APK
+
+        </a>
+
+    </div>
+
+</div>
+
+<!-- NEW PROJECT -->
+
+<div class="glass project-card">
+
+    <div class="project-image">
+
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop">
+
+    </div>
+
+    <div class="project-content">
+
+        <h3>E-Commerce App</h3>
+
+        <p>
+        API • Firebase • Payment System
+        </p>
+
+        <a href="#" class="apk-btn">
+
+            <i class="fas fa-download"></i>
+
+            Download APK
+
+        </a>
+
+    </div>
+
+</div>
+
+<!-- NEW PROJECT -->
+
+<div class="glass project-card">
+
+    <div class="project-image">
+
+        <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=1200&auto=format&fit=crop">
+
+    </div>
+
+    <div class="project-content">
+
+        <h3>School Management</h3>
+
+        <p>
+        Dashboard • MySQL • Android
+        </p>
+
+        <a href="#" class="apk-btn">
+
+            <i class="fas fa-download"></i>
+
+            Download APK
+
+        </a>
+
+    </div>
+
+</div>
+
+<!-- NEW PROJECT -->
+
+<div class="glass project-card">
+
+    <div class="project-image">
+
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop">
+
+    </div>
+
+    <div class="project-content">
+
+        <h3>Doctor Appointment App</h3>
+
+        <p>
+        Booking System • Firebase • REST API
+        </p>
+
+        <a href="#" class="apk-btn">
+
+            <i class="fas fa-download"></i>
+
+            Download APK
+
+        </a>
+
+    </div>
+
+</div>
+
+<!-- NEW PROJECT -->
+<!-- আগের project-card -->
+
+<!-- এখানে নতুন project গুলো paste করবেন -->
+<!-- NEW PROJECT -->
+
+</div>  
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+<div class="container">
+
+<div class="glass contact-box">
+
+<h2>
+আপনার পরবর্তী <span>Android App</span><br>
+আজই তৈরি শুরু করুন।
+</h2>
+
+<p>
+
+আপনার Project Idea,
+Business App
+অথবা Custom Android Application নিয়ে আজই যোগাযোগ করুন।
+
+</p>
+
+<form id="contactForm">
+
+<input type="text" placeholder="Your Name" required>
+
+<input type="email" placeholder="Your Email" required>
+
+<textarea placeholder="Tell me about your project..." required></textarea>
+
+<button type="submit">
+
+SEND MESSAGE
+
+</button>
+
+</form>
+
+<div class="socials">
+
+<a href="https://www.facebook.com/rashidunlimited">
+
+<i class="fab fa-facebook-f"></i>
+
+</a>
+
+<a href="https://github.com/rashidunlimited">
+
+<i class="fab fa-github"></i>
+
+</a>
+
+<a href="https://wa.me/8801766486255">
+
+<i class="fab fa-whatsapp"></i>
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+© 2026 Rashid Ahmed • Native Android Developer • Bangladesh
+
+</footer>
+
+<script>
+
+/* CURSOR */
+
+const cursor=document.getElementById("cursor");
+
+document.addEventListener("mousemove",(e)=>{
+
+gsap.to(cursor,{
+x:e.clientX-10,
+y:e.clientY-10,
+duration:0.15
+});
+
+});
+
+document.querySelectorAll("a,button").forEach(el=>{
+
+el.addEventListener("mouseenter",()=>{
+
+gsap.to(cursor,{
+scale:3,
+background:"#00ff9d",
+opacity:0.3
+});
+
+});
+
+el.addEventListener("mouseleave",()=>{
+
+gsap.to(cursor,{
+scale:1,
+background:"#fff",
+opacity:1
+});
+
+});
+
+});
+
+/* CONTACT FORM */
+
+document.getElementById("contactForm")
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const name=this.querySelector('input[type="text"]').value;
+
+const email=this.querySelector('input[type="email"]').value;
+
+const project=this.querySelector('textarea').value;
+
+const message=
+`Assalamu Alaikum Rashid Ahmed,
+
+Name: ${name}
+
+Email: ${email}
+
+Project Details:
+${project}`;
+
+const url=
+`https://wa.me/8801766486255?text=${encodeURIComponent(message)}`;
+
+window.open(url,"_blank");
+
+});
+
+/* THEME TOGGLE */
+
+const themeToggle=document.getElementById("themeToggle");
+
+themeToggle.addEventListener("click",()=>{
+
+document.body.classList.toggle("light-theme");
+
+const icon=themeToggle.querySelector("i");
+
+if(document.body.classList.contains("light-theme")){
+
+icon.classList.remove("fa-moon");
+icon.classList.add("fa-sun");
+
+localStorage.setItem("theme","light");
+
+}else{
+
+icon.classList.remove("fa-sun");
+icon.classList.add("fa-moon");
+
+localStorage.setItem("theme","dark");
+
+}
+
+});
+
+/* LOAD THEME */
+
+window.addEventListener("load",()=>{
+
+const savedTheme=localStorage.getItem("theme");
+
+if(savedTheme==="light"){
+
+document.body.classList.add("light-theme");
+
+themeToggle.querySelector("i")
+.classList.replace("fa-moon","fa-sun");
+
+}
+
+});
+
+/* GSAP */
+
+gsap.from(".hero h1",{
+y:80,
+opacity:0,
+duration:1.2
+});
+
+gsap.from(".hero p",{
+y:50,
+opacity:0,
+duration:1.5
+});
+
+gsap.from(".phone-frame",{
+scale:0.8,
+opacity:0,
+duration:1.5
+});
+
+</script>
+
+</body>
+</html>
